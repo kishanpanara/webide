@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+	    <link rel="SHORTCUT ICON" href="image/favicon.ico" >
+		<script src="resources/sap-ui-core.js"
+				id="sap-ui-bootstrap"
+				data-sap-ui-libs="sap.ui.commons,sap.m"
+				data-sap-ui-theme="sap_bluecrystal">
+		</script>
+		<!-- add sap.ui.table,sap.ui.ux3 and/or other libraries to 'data-sap-ui-libs' if required -->
+
+		<script>
+		/* var olayout=new sap.ui.commons.layout.MatrixLayout({
+			width:"100%",
+			widths: ["10%","5%","40%","30%" ]
+		});
+		var oTextView = new sap.ui.commons.TextView({
+			text : 'Hospital Management',
+			tooltip : 'This is a Tooltip',
+			wrapping : false,
+			width : '100%',
+			textAlign : sap.ui.core.TextAlign.Center,
+			semanticColor: sap.ui.commons.TextViewColor.Positive,
+			design: sap.ui.commons.TextViewDesign.H1
+			});
+		
+	 	var otile = new sap.m.StandardTile("Tile1",{icon :"/imgc",
+            title:"App1",
+            press:onPress
+            }); 
+		 var otile = new sap.m.Tile({
+		    title: "Patient Mnagement",
+		    press: function(){}
+		   }); 
+		   
+		oTextView.placeAt("content");
+		otile.placeAt("content"); */
+		//Alternative 1: Doesn't work (shows no tiles)  
+		var App = new sap.m.App({ id:"App"});  
+		App.placeAt("content");   
+		  console.log("Mahesh");
+		var Page = new sap.m.Page({title:"Hospital Management",id:"Page",enableScrolling: false});  
+		//App.addPage(Page);  
+		
+		  
+		var oContainer = new sap.m.TileContainer({});  
+		Page.addContent(oContainer);  
+		  
+		var T1 = new sap.m.StandardTile({title:"Patient Management"});  
+		oContainer.addTile(T1);   
+		var T2 = new sap.m.StandardTile({title:"Ward Management"});  
+		oContainer.addTile(T2);  
+		var T3 = new sap.m.StandardTile({title:"Doctor Diagnosys"});  
+		oContainer.addTile(T3); 
+		      var T4 = new sap.m.StandardTile({title:"Account"});  
+		oContainer.addTile(T4);
+		T1.attachPress(function(){
+			//alert("hiii Mahesh");
+			App.to("pm");
+		});
+		T2.attachPress(function(){
+			//alert("hiii Mahesh");
+			App.to("wm");
+		});
+		T3.attachPress(function(){
+			//alert("hiii Mahesh");
+			App.to("dd");
+		});
+		T4.attachPress(function(){
+			alert("hiii Mahesh");
+			App.to("acc");
+		});
+		var T5 = new sap.m.StandardTile({title:"In Patient"});  
+		oContainer.addTile(T5);
+		var T6 = new sap.m.StandardTile({title:"Out Patient"});  
+		oContainer.addTile(T6);
+		
+		var T7 = new sap.m.StandardTile({title:"General"});  
+		oContainer.addTile(T7);
+		var T8 = new sap.m.StandardTile({title:"ICU"});  
+		oContainer.addTile(T8);
+		
+		var page2 = new sap.m.Page("pm", {
+	        title: "Patient Management",
+	        showNavButton: true, // page 2 should display a back button
+	        navButtonPress: function () {
+	            App.back(); // when pressed, the back button should navigate back up to page 1
+	        },
+	        content: [T5,T6]
+	    });
+		var page3 = new sap.m.Page("wm", {
+	        title: "Ward Management",
+	        showNavButton: true, // page 2 should display a back button
+	        navButtonPress: function () {
+	            App.back(); // when pressed, the back button should navigate back up to page 1
+	        },
+	        content: [T7,T8]
+	    });
+		
+		// Create the ListBox
+		var oSimpleListBox = new sap.ui.commons.ListBox({
+			items : [
+			 		new sap.ui.core.ListItem({text : 'Spring'}),
+					new sap.ui.core.ListItem({text : 'Summer'}),
+					new sap.ui.core.ListItem({text : 'Autumn'}),
+					new sap.ui.core.ListItem({text : 'Winter'})
+		  ],
+		  select : function(e) {
+			  var a=["Your favorite season(s): "];
+			  jQuery.each(oSimpleListBox.getSelectedItems(), function(idx,item) { a.push(item.getText(), "");});
+			  oTextSummary.setText(a.join(""));
+		  }
+		});
+		var oTextSummary = new sap.ui.commons.TextView();
+		/* var oMultiSelectionCheckBox = new sap.ui.commons.CheckBox({
+				text: "MultiSelection",
+				checked : false,
+				change : function(e) { oSimpleListBox.setAllowMultiSelect(e.getSource().getChecked()); } 
+		}); */
+		var page4 = new sap.m.Page("dd", {
+	        title: "Doctor",
+	        showNavButton: true, 
+	        navButtonPress: function () {
+	            App.back(); // when pressed, the back button should navigate back up to page 1
+	        },
+	        content: [oSimpleListBox,oTextSummary]
+	    });
+		App.addPage(Page).addPage(page2).addPage(page3).addPage(page4);
+		//App.addPage(page2);
+
+		</script>
+
+	</head>
+	<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+</html>
